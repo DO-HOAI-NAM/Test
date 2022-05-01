@@ -1,0 +1,38 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+	<div class="container-fluid col-md-8 text-center"></div>
+	<div class="container-fluid col-md-8 text-center">
+		<h2 class="text text-success mb-3">{{ student.name }}</h2>
+		<div class="row">
+			<div class="col">
+				<img src="{{ student.image }}" width="250" height="250">
+			</div>
+			<div class="col">
+				<h5 class="text-info">PHONE:
+					{{ student.phone }}</h5>
+
+				<h5>GENDER:
+					{{student.gender}}</h5>
+
+				<h5>AGE:
+					{{student.age}}</h5>
+				<h5>grade:
+					{{student.grade}}</h5>
+
+
+				<h5 class="text-info">
+					Course List:
+
+					{% if student.course != null %}
+						<a class="text text-success" href="{{ path('course_detail' , {'id' : student.course.id })}}">
+							{{ student.course.name }}
+						</a>
+						<br>
+					{% endif %}
+				</h5>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}

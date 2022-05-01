@@ -1,0 +1,86 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<div class="container-fluid text-center">
+		<h2>Student Management</h2>
+
+		<table class="table table-hover">
+			<tr>
+				<th>ID</th>
+				<th>Name</th>
+				<th>Course Name</th>
+				<th>Gender</th>
+				<th>Age
+					<select onchange="window.location.href = this.value">
+						<option>Sort</option>
+						<option value="{{ path('age_asc')}}">Ascending</option>
+
+						<option value="{{ path('age_desc')}}">Descending</option>
+
+					</select>
+
+				</th>
+				<th>Phone</th>
+				<th>Grade
+
+
+				</th>
+
+				<th>Image</th>
+				<th>Menu</th>
+
+			</tr>
+
+			<script language="JavaScript">
+				var num = 1
+			</script>
+			{% for student in students %}
+
+				<tr>
+					<td>
+						<script language="JavaScript">
+							document.write(num++);
+						</script>
+					</td>
+
+
+					<td>{{student.name}}</td>
+					<td>
+						{% if student.course != null %}
+							<a class="text text-success text-decoration-none" href="{{ path('course_detail', {'id' : student.course.id })}}">
+								{{ student.course.name }}
+							</a>
+						{% endif %}
+					</td>
+					<td>{{student.gender}}</td>
+					<td>{{student.age}}</td>
+					<td>{{student.phone}}</td>
+					<td>{{student.grade}}</td>
+					{# <td>
+																<a href=" {{path('sum_grade',{'grade':student.grade})}}"></a>
+										
+										
+															</td> #}
+
+					<td>
+						<a href="{{path('student_detail', {'id' : student.id})}}"><img src="{{student.image}}" width="100" height="100"></a>
+
+					</td>
+
+
+					<td>
+						<a class="btn btn-warning" href="{{ path('student_edit', {'id' : student.id }) }}">EDIT</a>
+						<a class="btn btn-danger" href="{{ path('student_delete', {'id' : student.id}) }}" onclick="return confirm('Do you want to delete this book ?');">DELETE</a>
+
+						<a class="btn btn-primary" href="{{ path('student_add')}}">ADD</a>
+
+
+					</td>
+
+
+				{% endfor %}
+			</table>
+
+
+		</div>
+	{% endblock %}
